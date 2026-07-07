@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "SAT Question Bank Practice",
+  "version": "0.1.0",
+  "description": "Bluebook-style practice layer for the SAT Suite Educator Question Bank: selectable choices, deferred grading, retry-before-rationale.",
+  "permissions": ["storage"],
+  "host_permissions": ["https://qbank-api.collegeboard.org/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://satsuitequestionbank.collegeboard.org/*"],
+      "js": [
+        "content/selectors.js",
+        "content/api.js",
+        "content/observer.js",
+        "content/main.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
