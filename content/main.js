@@ -125,12 +125,14 @@
   }
 
   async function onQuestionChange(questionId) {
+    // FR-3: idempotency — abort before teardown if this question's UI is
+    // already mounted (e.g. a second content-script instance after an
+    // extension reload), so we don't strip a live mount's marker.
+    const modal = modalEl();
+    if (modal && modal.getAttribute(M.MOUNTED) === questionId) return;
     teardown();
     const token = ++initToken;
-    const modal = modalEl();
     if (!modal) return;
-    // FR-3: idempotency — abort if this question's UI is already mounted.
-    if (modal.getAttribute(M.MOUNTED) === questionId) return;
 
     // FR-7 + R5: suppress and clear a carried-over reveal checkbox before
     // anything can flash. MutationObserver callbacks run before paint, so
