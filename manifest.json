@@ -11,9 +11,11 @@
       "js": [
         "content/selectors.js",
         "content/api.js",
+        "content/ui-mc.js",
         "content/observer.js",
         "content/main.js"
       ],
+      "css": ["content/styles.css"],
       "run_at": "document_idle"
     }
   ]

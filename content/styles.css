@@ -1,0 +1,76 @@
+/* Extension state styles. Inset box-shadows instead of borders so choice
+   rows never shift layout, and the ::marker A-D letters stay untouched. */
+
+li.sqb-choice {
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+li.sqb-choice:hover:not(.sqb-locked) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+li.sqb-choice:focus-visible {
+  outline: 2px solid #0077c8;
+  outline-offset: 2px;
+}
+
+li.sqb-selected {
+  box-shadow: inset 0 0 0 2px #0077c8;
+  background-color: rgba(0, 119, 200, 0.08);
+}
+
+li.sqb-correct {
+  box-shadow: inset 0 0 0 2px #1e8e3e;
+  background-color: rgba(30, 142, 62, 0.12);
+}
+
+li.sqb-incorrect {
+  box-shadow: inset 0 0 0 2px #d93025;
+  background-color: rgba(217, 48, 37, 0.1);
+}
+
+li.sqb-locked {
+  cursor: default;
+}
+
+li.sqb-locked:not(.sqb-correct):not(.sqb-incorrect) {
+  opacity: 0.75;
+}
+
+.sqb-controls {
+  margin: 12px 0;
+}
+
+.sqb-btn {
+  font: inherit;
+  font-weight: 600;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 999px;
+  background-color: #0077c8;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sqb-btn:hover:not(:disabled) {
+  background-color: #005a99;
+}
+
+.sqb-btn:disabled {
+  background-color: #b5bcc4;
+  cursor: default;
+}
+
+/* FR-7: default-hide the native rationale region while extension UI is
+   mounted; the class is removed at RESOLVED. Defense in depth — the primary
+   guarantee is the init-time uncheck of the reveal checkbox (main.js), since
+   the rationale only renders while that box is checked. The selectors below
+   are candidates for the rationale container; keep the toggle row itself
+   visible so the user can still deliberately reveal (FR-9). */
+#question-modal.sqb-suppress-rationale .rationale,
+#question-modal.sqb-suppress-rationale .rationale-content,
+#question-modal.sqb-suppress-rationale .answer-rationale {
+  display: none !important;
+}
