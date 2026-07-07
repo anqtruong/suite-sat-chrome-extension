@@ -63,6 +63,89 @@ li.sqb-locked:not(.sqb-correct):not(.sqb-incorrect) {
   cursor: default;
 }
 
+/* SPR (free-response) panel */
+
+.sqb-spr {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 12px 0;
+  max-width: 420px;
+}
+
+.sqb-spr-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 600;
+}
+
+.sqb-input {
+  font: inherit;
+  padding: 8px 12px;
+  border: 1px solid #b5bcc4;
+  border-radius: 6px;
+}
+
+.sqb-input:focus-visible {
+  outline: 2px solid #0077c8;
+  outline-offset: 1px;
+}
+
+.sqb-input:disabled {
+  background-color: #f3f5f7;
+  color: #1e1e1e;
+}
+
+.sqb-spr .sqb-btn {
+  align-self: flex-start;
+}
+
+.sqb-spr-result {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sqb-spr-heading {
+  font-weight: 600;
+}
+
+.sqb-spr-answers {
+  margin: 0;
+  padding-left: 24px;
+}
+
+.sqb-assess {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.sqb-btn-right {
+  background-color: #1e8e3e;
+}
+
+.sqb-btn-right:hover:not(:disabled) {
+  background-color: #17702f;
+}
+
+.sqb-btn-wrong {
+  background-color: #d93025;
+}
+
+.sqb-btn-wrong:hover:not(:disabled) {
+  background-color: #b3261c;
+}
+
+.sqb-btn:disabled.sqb-assess-picked {
+  outline: 2px solid #1e1e1e;
+  outline-offset: 2px;
+  opacity: 1;
+}
+
 /* FR-7: default-hide the native rationale region while extension UI is
    mounted; the class is removed at RESOLVED. Defense in depth — the primary
    guarantee is the init-time uncheck of the reveal checkbox (main.js), since

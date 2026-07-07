@@ -55,11 +55,22 @@
 
   function resolveByOverride() {
     if (!active || active.resolved) return;
+    // A revealed SPR already shows the rationale; locking here would only
+    // take away the pending self-assess. Let that flow finish.
+    if (active.ui && active.ui.getState().phase === "REVEALED") return;
     active.resolved = true;
     if (active.ui) active.ui.lock();
     setSuppressed(false);
     // No record: the question was revealed, not answered (R6: unresolved-by-
     // attempt is not wrong).
+  }
+
+  // SPR Reveal (FR-20): show the official rationale without resolving yet —
+  // self-assess still follows.
+  function onReveal() {
+    if (!active || active.resolved) return;
+    setSuppressed(false);
+    setNativeCheckbox(true);
   }
 
   // UI callback on a graded resolution (FR-13 paths, later SPR self-assess).
@@ -75,13 +86,11 @@
     if (!active || active.inert) return;
     const { question } = active;
     let ui = null;
+    const callbacks = { onResolved, onReveal };
     if (question.type === "mcq") {
-      ui = SQB.uiMC.mount(question, { onResolved }, restore);
+      ui = SQB.uiMC.mount(question, callbacks, restore);
     } else if (question.type === "spr") {
-      // SPR flow lands in Phase 3; until then the native page is untouched.
-      active.inert = true;
-      setSuppressed(false);
-      return;
+      ui = SQB.uiSPR.mount(question, callbacks, restore);
     } else {
       active.inert = true;
       setSuppressed(false);
@@ -93,7 +102,13 @@
     const modal = modalEl();
     if (modal) modal.setAttribute(M.MOUNTED, active.questionId);
     attachOverrideListener();
-    if (active.resolved) setSuppressed(false);
+    // After an R2 remount, re-reveal anything the restored state had earned:
+    // the fresh native render starts with the rationale hidden again.
+    const phase = ui.getState().phase;
+    if (active.resolved || phase === "REVEALED" || phase === "RESOLVED") {
+      setSuppressed(false);
+      setNativeCheckbox(true);
+    }
   }
 
   async function onQuestionChange(questionId) {

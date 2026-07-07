@@ -12,6 +12,7 @@
         "content/selectors.js",
         "content/api.js",
         "content/ui-mc.js",
+        "content/ui-spr.js",
         "content/observer.js",
         "content/main.js"
       ],
