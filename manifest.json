@@ -12,7 +12,10 @@
   "host_permissions": ["https://qbank-api.collegeboard.org/*"],
   "content_scripts": [
     {
-      "matches": ["https://satsuitequestionbank.collegeboard.org/*"],
+      "matches": [
+        "https://satsuitequestionbank.collegeboard.org/*",
+        "https://satsuiteeducatorquestionbank.collegeboard.org/*"
+      ],
       "js": [
         "content/selectors.js",
         "shared/session.js",
