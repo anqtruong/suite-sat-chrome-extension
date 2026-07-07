@@ -73,13 +73,26 @@
     setNativeCheckbox(true);
   }
 
-  // UI callback on a graded resolution (FR-13 paths, later SPR self-assess).
+  // UI callback on a graded resolution (FR-13 paths, SPR self-assess).
   function onResolved(outcome) {
     if (!active || active.resolved) return;
     active.resolved = true;
     setSuppressed(false); // FR-20: rationale at the pedagogically correct moment
     setNativeCheckbox(true); // native region renders only while box is checked
-    void outcome; // recording layer lands in Phase 4
+    // FR-22: one record per resolution, built entirely from API data.
+    const { questionId, row, question } = active;
+    SQB.session.record({
+      questionId,
+      externalId: row.external_id,
+      type: question.type,
+      firstAttemptCorrect: outcome.firstAttemptCorrect,
+      usedRetry: outcome.usedRetry,
+      program: row.program,
+      domain: row.primary_class_cd_desc,
+      skill: row.skill_desc,
+      difficulty: row.difficulty,
+      timestamp: new Date().toISOString(),
+    });
   }
 
   function mountUI(restore) {

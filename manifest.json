@@ -10,6 +10,7 @@
       "matches": ["https://satsuitequestionbank.collegeboard.org/*"],
       "js": [
         "content/selectors.js",
+        "shared/session.js",
         "content/api.js",
         "content/ui-mc.js",
         "content/ui-spr.js",
