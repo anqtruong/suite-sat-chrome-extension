@@ -1,5 +1,9 @@
 # SAT Question Bank Practice
 
+My sister was preparing for the SAT, but wasn't sure where to practice. I figured that back in highschool, the most accurate questions were directly from CollegeBoard's SAT Question Bank. However, the question bank was essentially just a database of questions: the answers were clearly displayed, and there wasn't an efficient way to simulate SAT practice. I built this tool to emulate SAT multiple choice practice!
+
+## What it is:
+
 A Chrome extension (Manifest V3) that overlays a Bluebook-style interactive
 practice layer onto the [SAT Suite Educator Question Bank](https://satsuitequestionbank.collegeboard.org):
 selectable answer choices, deferred grading, retry-before-rationale, and
