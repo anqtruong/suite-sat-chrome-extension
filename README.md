@@ -9,7 +9,7 @@ practice layer onto the [SAT Suite Educator Question Bank](https://satsuitequest
 selectable answer choices, deferred grading, retry-before-rationale, and
 spoiler-safe answer handling — turning the official question corpus into a
 real practice environment without modifying or redistributing any College
-Board content. Made this to help my sister practice for the SAT easier.
+Board content
 
 ## What it does
 
